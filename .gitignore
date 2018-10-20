@@ -26,15 +26,15 @@
 *.a
 *.lib
 
+# My test directory
+test
+
 # Executables
 *.exe
 *.out
 *.app
-lab1
-lab2
-lab3
-lab4
-lab5
+lab*
 
 # Test files
 *.txt
+*.sh
