@@ -10,7 +10,7 @@ public:
   void addAttribute(string a);
   int getIndexOf(string s);
 	int size();
-  string getAttributeAt(int i);
+  string at(int i);
   string toString();
 private:
 	vector<string> schema;

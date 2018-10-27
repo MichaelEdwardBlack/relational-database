@@ -41,6 +41,27 @@ Relation Relation::selectColumnColumn(string column1, string column2) {
   return newTable;
 }
 
+Relation Relation::project(Schema s) {
+  Relation newTable;
+  newTable.addColumns(s);
+  Tuple newRow;
+  int numColumns = s.size();
+  vector<int> columnIndex;
+  for (int i = 0; i < numColumns; i++) {
+    columnIndex.push_back(this->columns.getIndexOf(s.at(i)));
+  }
+
+  for (set<Tuple>::iterator it = rows.begin(); it != rows.end(); ++it) {
+    newRow.clear();
+    for (int i = 0; i < numColumns; i++) {
+      newRow.push_back(it->at(columnIndex.at(i)));
+    }
+    newTable.addRow(newRow);
+  }
+
+  return newTable;
+}
+
 Schema Relation::getColumns() {
   return columns;
 }

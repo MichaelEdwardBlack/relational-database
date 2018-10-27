@@ -20,7 +20,7 @@ int Schema::size() {
   return numAttributes;
 }
 
-string Schema::getAttributeAt(int i) {
+string Schema::at(int i) {
   return schema.at(i);
 }
 

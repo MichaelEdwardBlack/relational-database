@@ -11,7 +11,8 @@ public:
   void addRow(Tuple t);
   Relation selectColumnValue(string column, string value);
   Relation selectColumnColumn(string column1, string column2);
-  Schema getColumns();
+	Relation project(Schema s);
+	Schema getColumns();
   set<Tuple> getRows();
   string printColumns();
   string printRows();

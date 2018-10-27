@@ -100,7 +100,16 @@ int main(int argc, char* argv[]) {
 	midterms.addRow(marlee);
 
 	Relation exams_1_3 = midterms.selectColumnColumn("EXAM_1","EXAM_3");
+	cout << "Showing scores where exam 1 is the same as exam 2" << endl;
 	cout << exams_1_3.printColumns() << endl << exams_1_3.printRows();
+
+	Schema projHeaders;
+	projHeaders.addAttribute("STUDENT");
+	projHeaders.addAttribute("EXAM_1");
+	projHeaders.addAttribute("EXAM_4");
+	Relation firstAndLastExams = midterms.project(projHeaders);
+	cout << "Projecting just the first and last exams of all students" << endl;
+	cout << firstAndLastExams.printColumns() << endl << firstAndLastExams.printRows();
 
 	return 0;
 }
