@@ -8,12 +8,16 @@ class Relation {
 public:
 	Relation();
   void addColumns(Schema s);
-  void addTuple(Tuple t);
-  //Relation select(string column, string value);
-  //Relation select(string column1, string column2);
+  void addRow(Tuple t);
+  Relation selectColumnValue(string column, string value);
+  Relation selectColumnColumn(string column1, string column2);
+  Schema getColumns();
+  vector<Tuple> getRows();
+  Tuple getRowAt(int i);
   string printColumns();
   string printRows();
 private:
 	Schema columns;
   vector<Tuple> rows;
+  int numRows;
 };
