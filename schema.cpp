@@ -1,9 +1,23 @@
 #include "schema.h"
 
-Schema::Schema() {}
+Schema::Schema() { numAttributes = 0; }
 
 void Schema::addAttribute(string a) {
   schema.push_back(a);
+  numAttributes++;
+}
+
+int Schema::getIndexOf(string s) {
+  for (int i = 0; i < numAttributes; i++) {
+    if (schema.at(i) == s) {
+      return i;
+    }
+  }
+  return -1; // error
+}
+
+string Schema::getAttributeAt(int i) {
+  return schema.at(i);
 }
 
 string Schema::toString() {
