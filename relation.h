@@ -1,4 +1,4 @@
-#include <vector>
+#include <set>
 #include "schema.h"
 #include "tuple.h"
 
@@ -12,12 +12,11 @@ public:
   Relation selectColumnValue(string column, string value);
   Relation selectColumnColumn(string column1, string column2);
   Schema getColumns();
-  vector<Tuple> getRows();
-  Tuple getRowAt(int i);
+  set<Tuple> getRows();
   string printColumns();
   string printRows();
 private:
 	Schema columns;
-  vector<Tuple> rows;
+  set<Tuple> rows;
   int numRows;
 };

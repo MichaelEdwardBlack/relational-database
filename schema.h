@@ -9,6 +9,7 @@ public:
 	Schema();
   void addAttribute(string a);
   int getIndexOf(string s);
+	int size();
   string getAttributeAt(int i);
   string toString();
 private:

@@ -7,8 +7,7 @@ void Relation::addColumns(Schema s) {
 }
 
 void Relation::addRow(Tuple t) {
-  // *** add a section to check for duplicates ***
-  rows.push_back(t);
+  rows.insert(t);
   numRows++;
 }
 
@@ -18,29 +17,27 @@ Relation Relation::selectColumnValue(string column, string value) {
   newTable.addColumns(this->columns);
   int columnIndex = this->columns.getIndexOf(column);
 
-  for (int i = 0; i < numRows; i++) {
-    Tuple tempTuple = getRowAt(i);
-    if (tempTuple.getValueAt(columnIndex) == value) {
-        newTable.addRow(tempTuple);
+  for (set<Tuple>::iterator it = rows.begin(); it != rows.end(); ++it) {
+    if (it->at(columnIndex) == value) {
+      newTable.addRow(*it);
     }
   }
+
   return newTable;
 }
 
 Relation Relation::selectColumnColumn(string column1, string column2) {
   Relation newTable;
-  Schema newHeader;
+  newTable.addColumns(this->columns);
   int columnIndex1 = this->columns.getIndexOf(column1);
   int columnIndex2 = this->columns.getIndexOf(column2);
-  newHeader.addAttribute(this->columns.getAttributeAt(columnIndex1));
-  newHeader.addAttribute(this->columns.getAttributeAt(columnIndex2));
 
-  for (int i = 0; i < numRows; i++) {
-    Tuple tempTuple = getRowAt(i);
-    if (tempTuple.getValueAt(columnIndex1) == tempTuple.getValueAt(columnIndex2)) {
-        newTable.addRow(tempTuple);
-    }
+  for (set<Tuple>::iterator it = rows.begin(); it != rows.end(); ++it) {
+      if (it->at(columnIndex1) == it->at(columnIndex2)) {
+        newTable.addRow(*it);
+      }
   }
+
   return newTable;
 }
 
@@ -48,12 +45,8 @@ Schema Relation::getColumns() {
   return columns;
 }
 
-vector<Tuple> Relation::getRows() {
+set<Tuple> Relation::getRows() {
   return rows;
-}
-
-Tuple Relation::getRowAt(int i) {
-  return rows.at(i);
 }
 
 string Relation::printColumns() {
@@ -64,8 +57,14 @@ string Relation::printColumns() {
 
 string Relation::printRows() {
   std::stringstream ss;
-  for (int i = 0; i < numRows; i++) {
-    ss << rows.at(i).toString() << "\n";
+  int numColumns = columns.size();
+
+  for (set<Tuple>::iterator it = this->rows.begin(); it != this->rows.end(); ++it) {
+      for (int i = 0; i < numColumns; i++) {
+        ss << it->at(i) << ",\t";
+      }
+      ss << "\n";
   }
+
   return ss.str();
 }

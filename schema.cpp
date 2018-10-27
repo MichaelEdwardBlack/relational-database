@@ -16,6 +16,10 @@ int Schema::getIndexOf(string s) {
   return -1; // error
 }
 
+int Schema::size() {
+  return numAttributes;
+}
+
 string Schema::getAttributeAt(int i) {
   return schema.at(i);
 }
