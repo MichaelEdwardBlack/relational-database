@@ -6,6 +6,10 @@ void Tuple::addValue(string v) {
   tupleValues.push_back(v);
 }
 
+string Tuple::getValueAt(int i) {
+  return tupleValues.at(i);
+}
+
 string Tuple::toString() {
   std::stringstream ss;
   int size = tupleValues.size();
