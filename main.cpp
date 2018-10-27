@@ -21,8 +21,8 @@ int main(int argc, char* argv[]) {
 	hollan.addValue("21");
 	hollan.addValue("Wilson");
 	students.addColumns(headers);
-	students.addTuple(michael);
-	students.addTuple(hollan);
+	students.addRow(michael);
+	students.addRow(hollan);
 	cout << students.printColumns() << endl << students.printRows();
 
 	return 0;
