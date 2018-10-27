@@ -2,35 +2,28 @@
 #include <fstream>
 #include <sstream>
 #include "parser.h"
+#include "relation.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
+	Relation students;
+	Schema headers;
+	headers.addAttribute("NAME");
+	headers.addAttribute("AGE");
+	headers.addAttribute("HOME TOWN");
+	Tuple michael;
+	michael.addValue("Michael");
+	michael.addValue("24");
+	michael.addValue("Colorado Springs");
+	Tuple hollan;
+	hollan.addValue("Hollan");
+	hollan.addValue("21");
+	hollan.addValue("Wilson");
+	students.addColumns(headers);
+	students.addTuple(michael);
+	students.addTuple(hollan);
+	cout << students.printColumns() << endl << students.printRows();
 
-	//OPEN FILE/CHECK ERRORS
-	ifstream in(argv[1]);
-	//ofstream out(argv[2]); //uncomment this to use an output file
-
-	Lexer myLexer;
-	Parser myParser;
-
-	myLexer.scan(in);
-
-	try {
-		myParser.parse(myLexer.getTokens());
-		cout << myParser.toString();
-	}
-	catch (int error) {
-		stringstream errorStream;
-		errorStream << "Failure!" << endl << "  " << myLexer.getTokens()[error].toString() << endl;
-		cout << errorStream.str();
-
-		in.close();
-		//out.close(); //uncomment this and to use output file
-		return 0;
-	}
-
-	in.close();
-	//out.close(); //uncomment this to use output file and change all couts to outs
 	return 0;
 }
