@@ -15,9 +15,9 @@ void Relation::addRow(Tuple t) {
 Relation Relation::selectColumnValue(string column, string value) {
   Relation newTable;
   Schema newHeader;
-  int columnIndex = columns.getIndexOf(column);
-  newHeader.addAttribute(columns.getAttributeAt(columnIndex));
-  newTable.addColumns(newHeader);
+  newTable.addColumns(this->columns);
+  int columnIndex = this->columns.getIndexOf(column);
+
   for (int i = 0; i < numRows; i++) {
     Tuple tempTuple = getRowAt(i);
     if (tempTuple.getValueAt(columnIndex) == value) {
@@ -29,8 +29,19 @@ Relation Relation::selectColumnValue(string column, string value) {
 
 Relation Relation::selectColumnColumn(string column1, string column2) {
   Relation newTable;
+  Schema newHeader;
+  int columnIndex1 = this->columns.getIndexOf(column1);
+  int columnIndex2 = this->columns.getIndexOf(column2);
+  newHeader.addAttribute(this->columns.getAttributeAt(columnIndex1));
+  newHeader.addAttribute(this->columns.getAttributeAt(columnIndex2));
+
+  for (int i = 0; i < numRows; i++) {
+    Tuple tempTuple = getRowAt(i);
+    if (tempTuple.getValueAt(columnIndex1) == tempTuple.getValueAt(columnIndex2)) {
+        newTable.addRow(tempTuple);
+    }
+  }
   return newTable;
-  //FIX ME
 }
 
 Schema Relation::getColumns() {
