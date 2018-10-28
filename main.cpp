@@ -1,8 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "parser.h"
-#include "relation.h"
+#include "database.h"
 
 using namespace std;
 

@@ -11,6 +11,7 @@ public:
   int getIndexOf(string s);
 	int size();
   string at(int i);
+	void clear();
   string toString();
 private:
 	vector<string> schema;

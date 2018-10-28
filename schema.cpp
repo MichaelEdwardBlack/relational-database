@@ -24,6 +24,11 @@ string Schema::at(int i) {
   return schema.at(i);
 }
 
+void Schema::clear() {
+  schema.clear();
+  numAttributes = 0;
+}
+
 string Schema::toString() {
   std::stringstream ss;
   int size = schema.size();

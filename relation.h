@@ -14,7 +14,8 @@ public:
 	Relation project(Schema s);
 	Schema getColumns();
   set<Tuple> getRows();
-  string printColumns();
+	void clear();
+	string printColumns();
   string printRows();
 private:
 	Schema columns;

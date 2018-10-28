@@ -62,6 +62,12 @@ Relation Relation::project(Schema s) {
   return newTable;
 }
 
+void Relation::clear() {
+  columns.clear();
+  rows.clear();
+  numRows = 0;
+}
+
 Schema Relation::getColumns() {
   return columns;
 }
