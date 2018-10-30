@@ -1,0 +1,13 @@
+
+
+Schemes:
+  Grade(A)
+
+Facts:
+  Grade('a').
+  Grade('a').
+
+Rules:
+
+Queries:
+  Grade(A)?

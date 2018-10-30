@@ -1,0 +1,15 @@
+Schemes:
+	related(A,B)
+Facts:
+	related('joe','bob').
+	related('jim','bob').
+	related('joe','jim').
+	related('bob','bob').
+Rules:
+
+Queries:
+	related('joe','jim')?
+	related( who, 'bob')?
+	related('joe', anyone)?
+	related(X,X)?
+	related(X,Y)?

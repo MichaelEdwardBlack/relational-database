@@ -15,7 +15,7 @@ string Predicate::toString() {
 		ss << parameters.at(i).toString();
 		if (i < (size - 1)) {
 			ss << ",";
-		} 
+		}
 	}
 	ss << ")";
 	return ss.str();
@@ -34,6 +34,6 @@ vector<string> Predicate::getParameters() {
 	return params;
 }
 
-vector<Parameter> Predicate::getParameter() {
+vector<Parameter> Predicate::getParameterVector() {
 	return parameters;
 }

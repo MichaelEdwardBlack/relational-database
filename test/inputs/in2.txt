@@ -1,0 +1,11 @@
+
+
+Schemes:
+  joe(A)
+
+Facts:
+
+Rules:
+
+Queries:
+  joe(A)?

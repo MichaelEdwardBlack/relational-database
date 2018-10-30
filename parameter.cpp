@@ -10,6 +10,10 @@ Parameter::Parameter(bool lit, string n, string val) {
 	value = val;
 }
 
+string Parameter::getValue() {
+	return value;
+}
+
 bool Parameter::isLiteral() {
 	return literal;
 }
