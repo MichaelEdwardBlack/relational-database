@@ -1,0 +1,12 @@
+
+
+Schemes:
+  average(C)
+
+Facts:
+  average('c').
+
+Rules:
+
+Queries:
+  average(X)?

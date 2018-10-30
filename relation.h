@@ -9,15 +9,21 @@ public:
 	Relation();
   void addColumns(Schema s);
   void addRow(Tuple t);
-  Relation selectColumnValue(string column, string value);
-  Relation selectColumnColumn(string column1, string column2);
-	Relation project(Schema s);
+	void addRows(set<Tuple> tupleSet);
+  Relation selectColumnValue(int columnPosition, string value);
+  Relation selectColumnColumn(int column1, int column2);
+	Relation project(vector<int> indexes);
+	Relation rename(int columnPosition, string columnName);
+	void clear();
 	Schema getColumns();
   set<Tuple> getRows();
-	void clear();
-	string printColumns();
-  string printRows();
+	int getNumRows();
+	void setName(string n);
+	string getName();
+	string printColumns(); //for testing purposes
+  string printRows(); //for testing purposes
 private:
+	string name;
 	Schema columns;
   set<Tuple> rows;
   int numRows;

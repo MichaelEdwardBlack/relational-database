@@ -26,16 +26,12 @@
 *.a
 *.lib
 
-# My test directory
-test
-
 # Executables
 *.exe
 *.out
 *.app
 lab*
 
-# Test files
-*.txt
-*.sh
+# Temporary files
+*.test.sh
 *.swp

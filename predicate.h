@@ -11,7 +11,7 @@ public:
 	string toString();
 	string getName();
 	vector<string> getParameters();
-	vector<Parameter> getParameter();
+	vector<Parameter> getParameterVector();
 private:
 	string name;
 	vector<Parameter> parameters;

@@ -7,6 +7,10 @@ void Schema::addAttribute(string a) {
   numAttributes++;
 }
 
+void Schema::changeAttribute(int i, string v) {
+  schema.at(i) = v;
+}
+
 int Schema::getIndexOf(string s) {
   for (int i = 0; i < numAttributes; i++) {
     if (schema.at(i) == s) {
@@ -33,7 +37,7 @@ string Schema::toString() {
   std::stringstream ss;
   int size = schema.size();
   for (int i = 0; i < size; i++) {
-    ss << schema.at(i) << ",\t";
+    ss << schema.at(i) << ",";
   }
   return ss.str();
 }

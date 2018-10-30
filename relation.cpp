@@ -1,6 +1,6 @@
 #include "relation.h"
 
-Relation::Relation() { numRows = 0; }
+Relation::Relation() { numRows = 0; name = ""; }
 
 void Relation::addColumns(Schema s) {
   columns = s;
@@ -11,50 +11,52 @@ void Relation::addRow(Tuple t) {
   numRows++;
 }
 
-Relation Relation::selectColumnValue(string column, string value) {
-  Relation newTable;
-  Schema newHeader;
-  newTable.addColumns(this->columns);
-  int columnIndex = this->columns.getIndexOf(column);
+void Relation::addRows(set<Tuple> tupleSet) {
+  rows = tupleSet;
+  numRows = tupleSet.size();
+}
 
+Relation Relation::selectColumnValue(int columnPosition, string value) {
+  Relation newTable;
+  Schema newHeader = this->columns;
+  newTable.setName(this->name);
+  newTable.addColumns(newHeader);
   for (set<Tuple>::iterator it = rows.begin(); it != rows.end(); ++it) {
-    if (it->at(columnIndex) == value) {
+    if (it->at(columnPosition) == value) {
       newTable.addRow(*it);
     }
   }
-
   return newTable;
 }
 
-Relation Relation::selectColumnColumn(string column1, string column2) {
+Relation Relation::selectColumnColumn(int column1, int column2) {
   Relation newTable;
+  newTable.setName(this->name);
   newTable.addColumns(this->columns);
-  int columnIndex1 = this->columns.getIndexOf(column1);
-  int columnIndex2 = this->columns.getIndexOf(column2);
-
   for (set<Tuple>::iterator it = rows.begin(); it != rows.end(); ++it) {
-      if (it->at(columnIndex1) == it->at(columnIndex2)) {
+      if (it->at(column1) == it->at(column2)) {
         newTable.addRow(*it);
       }
   }
-
   return newTable;
 }
 
-Relation Relation::project(Schema s) {
+Relation Relation::project(vector<int> indexes) {
   Relation newTable;
-  newTable.addColumns(s);
+  newTable.setName(this->name);
+  Schema newColumns;
   Tuple newRow;
-  int numColumns = s.size();
-  vector<int> columnIndex;
+  int numColumns = indexes.size();
+  // Make new headers for the columns
   for (int i = 0; i < numColumns; i++) {
-    columnIndex.push_back(this->columns.getIndexOf(s.at(i)));
+    newColumns.addAttribute(this->columns.at(indexes.at(i)));
   }
-
+  newTable.addColumns(newColumns);
+  // Add rows to the new table
   for (set<Tuple>::iterator it = rows.begin(); it != rows.end(); ++it) {
     newRow.clear();
     for (int i = 0; i < numColumns; i++) {
-      newRow.push_back(it->at(columnIndex.at(i)));
+      newRow.push_back(it->at(indexes.at(i)));
     }
     newTable.addRow(newRow);
   }
@@ -62,10 +64,22 @@ Relation Relation::project(Schema s) {
   return newTable;
 }
 
+Relation Relation::rename(int columnPosition, string columnName) {
+  Relation tempTable;
+  Schema tempColumns = this->columns;
+  tempColumns.changeAttribute(columnPosition, columnName);
+  set<Tuple> tempRows = rows;
+  tempTable.setName(this->name);
+  tempTable.addColumns(tempColumns);
+  tempTable.addRows(tempRows);
+  return tempTable;
+}
+
 void Relation::clear() {
   columns.clear();
   rows.clear();
   numRows = 0;
+  name = "";
 }
 
 Schema Relation::getColumns() {
@@ -73,7 +87,19 @@ Schema Relation::getColumns() {
 }
 
 set<Tuple> Relation::getRows() {
-  return rows;
+  return this->rows;
+}
+
+int Relation::getNumRows() {
+  return this->numRows;
+}
+
+void Relation::setName(string n) {
+  this->name = n;
+}
+
+string Relation::getName() {
+  return this->name;
 }
 
 string Relation::printColumns() {
@@ -84,11 +110,16 @@ string Relation::printColumns() {
 
 string Relation::printRows() {
   std::stringstream ss;
-  int numColumns = columns.size();
+  //problem here!!!
+  int numColumns = this->columns.size();
 
   for (set<Tuple>::iterator it = this->rows.begin(); it != this->rows.end(); ++it) {
+      ss << "  ";
       for (int i = 0; i < numColumns; i++) {
-        ss << it->at(i) << ",\t";
+        ss << this->columns.at(i) << "=" << it->at(i);
+        if (i < numColumns - 1) {
+          ss << ", ";
+        }
       }
       ss << "\n";
   }

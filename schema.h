@@ -8,6 +8,7 @@ class Schema {
 public:
 	Schema();
   void addAttribute(string a);
+	void changeAttribute(int i, string v);
   int getIndexOf(string s);
 	int size();
   string at(int i);

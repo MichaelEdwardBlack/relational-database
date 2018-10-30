@@ -1,0 +1,10 @@
+Schemes:
+	dc(D,C)
+Facts:
+	dc('sawyer','hollan').
+Rules:
+
+Queries:
+	dc('sawyer', X)?
+	dc('beto','beto')?
+	dc(X,Y)?
