@@ -20,8 +20,8 @@ public:
 	int getNumRows();
 	void setName(string n);
 	string getName();
-	string printColumns(); //for testing purposes
-  string printRows(); //for testing purposes
+	string printColumns();
+  string printRows();
 private:
 	string name;
 	Schema columns;

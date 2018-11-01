@@ -38,6 +38,8 @@ Facts:
    cr('CS101','Turing Aud.').
    cr('EE200','25 Ohm Hall').
    cr('PH100','Newton Lab.').
+   Students('CS101','TMCB 140','C. Brown','A').
+   Students('CS101','Turing Aud.','L. Van Pelt','B').
 
 Rules:
    before(C1,C2) :- cp(C2,C1).

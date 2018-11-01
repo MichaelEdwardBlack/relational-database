@@ -6,7 +6,7 @@ PROGRAM="lab3"
 
 if [ $# = 0 ]; then
 	g++ -g -Wall -std=c++17 -o ${PROGRAM} *.h *.cpp
-	for i in 1 2 3 4 5 6 7 8 9 10 11
+	for i in 1 2 3 4 5 6 7 8 9 10 11 12
 	do
 		./${PROGRAM} "${INPUT_PATH}/in${i}.txt" > "${OUTPUT_PATH}/out${i}.txt"
 		DIFF=$(diff ${OUTPUT_PATH}/out${i}.txt ${EXPECTED_PATH}/expected_out${i}.txt)
@@ -24,7 +24,7 @@ while [ "$1" != "" ]; do
 		-t | --test)
 			shift
 			./${PROGRAM} "${INPUT_PATH}/in$1.txt" > "${OUTPUT_PATH}/out$1.txt"
-			DIFF=(diff ${OUTPUT_PATH}/out$1.txt ${EXPECTED_PATH}/expected_out$1.txt)
+			DIFF=$(diff ${OUTPUT_PATH}/out$1.txt ${EXPECTED_PATH}/expected_out$1.txt)
 			if [ "$DIFF" == "" ]
 			then
 				echo "Test for in$1.txt passed!"
